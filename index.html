@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cleo - AI Trading Agent</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: #f7f3f0;
+            min-height: 100vh;
+            color: #2d2a27;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .landing-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        .main-content {
+            max-width: 500px;
+        }
+
+        .logo {
+            font-size: 4rem;
+            font-weight: 600;
+            color: #10b981;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #5a5651;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .tech-badge {
+            display: inline-block;
+            background: #ffffff;
+            border: 1px solid #e8e2dc;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            color: #5a5651;
+            font-size: 0.85rem;
+            margin: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: 1px solid #e8e2dc;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            background: #ffffff;
+            color: #2d2a27;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn:hover {
+            border-color: #10b981;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-primary {
+            background: #10b981;
+            color: white;
+            border-color: #10b981;
+        }
+
+        .btn-primary:hover {
+            background: #059669;
+            border-color: #059669;
+        }
+
+        .btn-secondary {
+            background: #ffffff;
+            color: #2d2a27;
+            border: 1px solid #e8e2dc;
+        }
+
+        .chat-page {
+            display: none;
+            min-height: 100vh;
+            background: #f9f9f9;
+        }
+
+        .docs-page {
+            display: none;
+            min-height: 100vh;
+            background: #f9f9f9;
+        }
+
+        .docs-header {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 1rem 0;
+        }
+
+        .docs-title {
+            font-size: 1.5rem;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .docs-content {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: #ffffff;
+            border: 1px solid #e8e2dc;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .docs-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .docs-section h3 {
+            font-size: 1.3rem;
+            color: #2d2a27;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            border-bottom: 2px solid #f4f1ed;
+            padding-bottom: 0.5rem;
+        }
+
+        .docs-section p {
+            line-height: 1.6;
+            color: #5a5651;
+            margin-bottom: 1rem;
+        }
+
+        .docs-section ul, .docs-section ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .docs-section li {
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+            color: #5a5651;
+        }
+
+        .code-block {
+            background: #faf8f6;
+            border: 1px solid #e8e2dc;
+            border-radius: 8px;
+            margin: 1rem 0;
+            overflow-x: auto;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .code-header {
+            background: #f4f1ed;
+            padding: 0.5rem 1rem;
+            border-bottom: 1px solid #e8e2dc;
+            font-size: 0.9rem;
+            color: #5a5651;
+            font-weight: 500;
+        }
+
+        .code-block pre {
+            margin: 0;
+            padding: 1rem;
+            overflow-x: auto;
+        }
+
+        .code-block code {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: #2d2a27;
+            background: none;
+        }
+
+        .chat-header {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 1rem 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-btn {
+            background: #333;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.2s ease;
+        }
+
+        .back-btn:hover {
+            background: #555;
+        }
+
+        .chat-title {
+            font-size: 1.5rem;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .chat-container {
+            max-width: 700px;
+            margin: 2rem auto;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .message {
+            max-width: 70%;
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            line-height: 1.5;
+            margin-bottom: 0.5rem;
+        }
+
+        .message.user {
+            background: #10b981;
+            color: white;
+            align-self: flex-end;
+        }
+
+        .message.bot {
+            background: #f4f1ed;
+            border: 1px solid #e8e2dc;
+            color: #2d2a27;
+            align-self: flex-start;
+        }
+
+        .chat-input {
+            padding: 1rem;
+            border-top: 1px solid #e8e2dc;
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .input-field {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid #e8e2dc;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s ease;
+            background: #ffffff;
+        }
+
+        .input-field:focus {
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+
+        .send-btn {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .send-btn:hover {
+            background: #059669;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        .send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .typing-indicator {
+            display: none;
+            align-self: flex-start;
+            background: #f4f1ed;
+            border: 1px solid #e8e2dc;
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 0.3rem;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: #cbd5e0;
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
+        }
+
+        .x-button {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background: #10b981;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.2rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .x-button:hover {
+            background: #059669;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        .warning-badge {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            color: #92400e;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            margin: 0.5rem;
+            display: inline-block;
+        }
+
+        @media (max-width: 768px) {
+            .logo { font-size: 3rem; }
+            .subtitle { font-size: 1.2rem; padding: 0 1rem; }
+            .buttons { flex-direction: column; align-items: center; }
+            .btn { width: 200px; justify-content: center; }
+            .chat-container { margin: 1rem; height: 60vh; }
+            .message { max-width: 85%; }
+        }
+    </style>
+</head>
+<body>
+    <button class="x-button" onclick="window.open('https://x.com', '_blank')" title="Follow us on X">
+        𝕏
+    </button>
+    
+    <div id="landingPage" class="landing-page">
+        <div class="container">
+            <div class="main-content">
+                <h1 class="logo">Cleo</h1>
+                <p class="subtitle">
+                    Meet Cleo, a bot we created using Claude Opus who can independently trade Solana memecoins using launchpads such as Pump.fun, Bonk, Jupiter, and more.
+                </p>
+                
+                <div class="tech-badge">
+                    Powered by Claude Opus
+                </div>
+                <div class="warning-badge">
+                    ⚠️ High-risk memecoin trading
+                </div>
+                
+                <div class="tech-badge" style="background: #e7f3ff; border-color: #3b82f6; color: #1e40af; font-family: monospace; font-size: 0.8rem;">
+                    Wallet: 54bmRfTaBBxHcRHpxndVpjMCUjL8gzHqFSgfGQZLmjS
+                </div>
+                
+                <div class="buttons">
+                    <button class="btn btn-primary" onclick="showDocs()">
+                        Docs
+                    </button>
+                    <button class="btn btn-primary" onclick="showTrades()">
+                        View Trades
+                    </button>
+                    <button class="btn btn-primary" onclick="showChat()">
+                        Chat with Cleo
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="docsPage" class="docs-page">
+        <div class="docs-header">
+            <div class="container">
+                <div class="header-content">
+                    <button class="back-btn" onclick="showLanding()">← Back</button>
+                    <h2 class="docs-title">Documentation</h2>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="docs-content">
+                <div class="docs-section">
+                    <h3>Wallet & Transparency</h3>
+                    <p>Track Claudia's trading activity in real-time through her public Solana wallet:</p>
+                    <div class="code-block">
+                        <div class="code-header">Claudia's Trading Wallet</div>
+                        <pre><code>54bmRfTaBBxHcRHpxndVpjMCUjL8gzHqFSgfGQZLmjS</code></pre>
+                    </div>
+                    <p>View on Solana explorers:</p>
+                    <ul>
+                        <li><strong>Solscan:</strong> solscan.io/account/54bmRfTaBBxHcRHpxndVpjMCUjL8gzHqFSgfGQZLmjS</li>
+                        <li><strong>SolanaFM:</strong> solana.fm/address/54bmRfTaBBxHcRHpxndVpjMCUjL8gzHqFSgfGQZLmjS</li>
+                        <li><strong>Solana Explorer:</strong> explorer.solana.com/address/54bmRfTaBBxHcRHpxndVpjMCUjL8gzHqFSgfGQZLmjS</li>
+                    </ul>
+                </div>
+
+                <div class="docs-section">
+                    <h3>What is Cleo?</h3>
+                    <p>Cleo is a memecoin trading bot we created using Claude Opus, designed to independently analyze and execute trades on Solana launchpads. She specializes in memecoin trading across platforms like Pump.fun, Jupiter, and Bonk, combining AI-powered analysis with real-time market sentiment to identify profitable opportunities in the fast-moving memecoin space.</p>
+                    <p><strong>Trading Wallet:</strong> <code style="background: #f3f4f6; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace;">54bmRfTaBBxHcRHpxndVpjMCUjL8gzHqFSgfGQZLmjS</code></p>
+                    <p><strong>Risk Warning:</strong> Memecoin trading is extremely volatile and high-risk. Cleo's trades can result in substantial losses. Only use funds you can afford to lose.</p>
+                </div>
+
+                <div class="docs-section">
+                    <h3>Key Features</h3>
+                    <ul>
+                        <li><strong>Solana Launchpad Integration:</strong> Direct connectivity to major Solana token launch platforms</li>
+                        <li><strong>Claude Opus Powered:</strong> Advanced reasoning for market analysis and sentiment evaluation</li>
+                        <li><strong>Real-time Analysis:</strong> Continuous monitoring of project fundamentals, tokenomics, and social sentiment</li>
+                        <li><strong>Risk Management:</strong> Built-in position sizing and stop-loss mechanisms</li>
+                        <li><strong>Transaction Logging:</strong> All trades recorded on-chain for transparency</li>
+                    </ul>
+                </div>
+
+                <div class="docs-section">
+                    <h3>Trading Strategy</h3>
+                    <p>Cleo employs a multi-factor analysis approach:</p>
+                    <ul>
+                        <li><strong>Project Analysis:</strong> Team background, whitepaper quality, roadmap assessment</li>
+                        <li><strong>Tokenomics Review:</strong> Supply distribution, vesting schedules, utility analysis</li>
+                        <li><strong>Social Sentiment:</strong> Community engagement, influencer mentions, Twitter activity</li>
+                        <li><strong>Technical Indicators:</strong> Price action, volume patterns, liquidity depth</li>
+                        <li><strong>Risk Assessment:</strong> Position sizing based on confidence levels and market conditions</li>
+                    </ul>
+                </div>
+
+                <div class="docs-section">
+                    <h3>API Integration</h3>
+                    <p>Monitor Cleo's trading activity and get market insights:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">GET /api/trades</div>
+                        <pre><code>{
+  "recent_trades": [
+    {
+      "token": "TOKEN_ADDRESS",
+      "action": "buy",
+      "amount": 1.5,
+      "price": 0.0234,
+      "confidence": 0.85,
+      "timestamp": 1690123456,
+      "tx_signature": "signature..."
+    }
+  ]
+}</code></pre>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">GET /api/analysis</div>
+                        <pre><code>{
+  "current_analysis": {
+    "watching": 15,
+    "bullish_signals": 8,
+    "bearish_signals": 3,
+    "neutral": 4,
+    "next_trade_probability": 0.72
+  }
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="docs-section">
+                    <h3>JavaScript SDK</h3>
+                    <p>Integrate Cleo's insights into your applications:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">Installation</div>
+                        <pre><code>npm install cleo-trading-sdk</code></pre>
+                    </div>
+
+                    <div class="code-block">
+                        <div class="code-header">Usage</div>
+                        <pre><code>import { CleoClient } from 'cleo-trading-sdk';
+
+const cleo = new CleoClient({
+  apiKey: 'your-api-key',
+  network: 'solana-mainnet'
+});
+
+// Get current portfolio
+const portfolio = await cleo.getPortfolio();
+
+// Get market analysis
+const analysis = await cleo.getMarketAnalysis();
+
+// Subscribe to trade notifications
+cleo.onTrade((trade) => {
+  console.log('New trade:', trade);
+});</code></pre>
+                    </div>
+                </div>
+
+                <div class="docs-section">
+                    <h3>Solana Program Integration</h3>
+                    <p>Direct integration with Solana programs for trading execution:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">Rust Program Example</div>
+                        <pre><code>use anchor_lang::prelude::*;
+use claudia_trading::state::TradeInstruction;
+
+#[program]
+pub mod claudia_integration {
+    use super::*;
+    
+    pub fn execute_trade(
+        ctx: Context&lt;ExecuteTrade&gt;,
+        instruction: TradeInstruction
+    ) -> Result&lt;()&gt; {
+        // Validate trade parameters
+        require!(
+            instruction.amount > 0,
+            ErrorCode::InvalidTradeAmount
+        );
+        
+        // Execute trade through Claudia
+        claudia_trading::execute_trade(
+            &ctx.accounts.trader,
+            &instruction
+        )?;
+        
+        Ok(())
+    }
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="docs-section">
+                    <h3>Python Integration</h3>
+                    <p>Monitor and analyze Cleo's performance:</p>
+                    
+                    <div class="code-block">
+                        <div class="code-header">Python SDK</div>
+                        <pre><code>from cleo_sdk import CleoTrader
+
+# Initialize Cleo client
+trader = CleoTrader(
+    api_key="your-api-key",
+    network="solana"
+)
+
+# Get recent performance
+performance = trader.get_performance(days=30)
+print(f"30-day ROI: {performance.roi}%")
+
+# Get current positions
+positions = trader.get_positions()
+for position in positions:
+    print(f"{position.token}: {position.pnl}% PnL")
+
+# Subscribe to trade alerts
+@trader.on_trade
+def handle_trade(trade):
+    print(f"Cleo {'bought' if trade.side == 'buy' else 'sold'} "
+          f"{trade.amount} {trade.token}")
+</code></pre>
+                    </div>
+                </div>
+
+                <div class="docs-section">
+                    <h3>Supported Launchpads & Platforms</h3>
+                    <ul>
+                        <li><strong>Pump.fun:</strong> Primary platform for new memecoin launches and community-driven tokens</li>
+                        <li><strong>Jupiter:</strong> Advanced DEX aggregator for optimal trade execution and routing</li>
+                        <li><strong>Bonk:</strong> Ecosystem and community-focused memecoin trading</li>
+                        <li><strong>Raydium:</strong> AMM and concentrated liquidity for memecoin pairs</li>
+                        <li><strong>Orca:</strong> User-friendly DEX with memecoin liquidity pools</li>
+                        <li><strong>Meteora:</strong> Dynamic vaults and yield farming for memecoin strategies</li>
+                    </ul>
+                </div>
+
+                <div class="docs-section">
+                    <h3>Risk Management & Limits</h3>
+                    <p>Cleo implements multiple layers of risk control:</p>
+                    <ul>
+                        <li><strong>Position Limits:</strong> Maximum 5% of portfolio per trade</li>
+                        <li><strong>Daily Loss Limit:</strong> Trading halts at 10% daily drawdown</li>
+                        <li><strong>Liquidity Checks:</strong> Minimum $50k liquidity required</li>
+                        <li><strong>Slippage Protection:</strong> Maximum 5% slippage tolerance</li>
+                        <li><strong>Rugpull Protection:</strong> Automated liquidity and developer wallet monitoring</li>
+                    </ul>
+                </div>
+
+                <div class="docs-section">
+                    <h3>Performance Tracking</h3>
+                    <p>Monitor Cleo's trading performance:</p>
+                    <ul>
+                        <li><strong>Real-time P&L:</strong> Live portfolio tracking</li>
+                        <li><strong>Win Rate:</strong> Percentage of profitable trades</li>
+                        <li><strong>Sharpe Ratio:</strong> Risk-adjusted returns</li>
+                        <li><strong>Maximum Drawdown:</strong> Largest peak-to-trough decline</li>
+                        <li><strong>Trade Analysis:</strong> Detailed breakdown of each decision</li>
+                    </ul>
+                </div>
+
+                <div class="docs-section">
+                    <h3>Getting Started</h3>
+                    <ol>
+                        <li>Fund your Solana wallet with SOL for trading</li>
+                        <li>Sign up for API access at <code>https://cleo-trader.com</code></li>
+                        <li>Configure your risk parameters and position sizes</li>
+                        <li>Enable Cleo and start automated trading</li>
+                    </ol>
+                    <p><strong>Important:</strong> Start with small amounts to test the system. Automated trading is highly risky.</p>
+                </div>
+
+                <div class="docs-section">
+                    <h3>Support & Community</h3>
+                    <p>Join the Cleo trading community:</p>
+                    <ul>
+                        <li><strong>Discord:</strong> discord.gg/cleo-trader</li>
+                        <li><strong>Telegram:</strong> t.me/cleo_trader</li>
+                        <li><strong>GitHub:</strong> github.com/cleo-trader/sdk</li>
+                        <li><strong>Email:</strong> support@cleo-trader.com</li>
+                        <li><strong>Documentation:</strong> docs.cleo-trader.com</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="tradesPage" class="docs-page">
+        <div class="docs-header">
+            <div class="container">
+                <div class="header-content">
+                    <button class="back-btn" onclick="showLanding()">← Back</button>
+                    <h2 class="docs-title">Cleo's Trades</h2>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="docs-content">
+                <div class="docs-section">
+                    <h3>Trading Activity</h3>
+                    <p>Track Cleo's live memecoin trades and performance metrics in real-time.</p>
+                    <p><strong>Wallet:</strong> <code style="background: #f3f4f6; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace;">54bmRfTaBBxHcRHpxndVpjMCUjL8gzHqFSgfGQZLmjS</code></p>
+                </div>
+
+                <div class="docs-section">
+                    <h3>Recent Trades</h3>
+                    <div style="text-align: center; padding: 3rem 2rem; background: #f9fafb; border: 2px dashed #d1d5db; border-radius: 12px; color: #6b7280;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">📊</div>
+                        <h4 style="color: #374151; margin-bottom: 0.5rem;">No trades made yet</h4>
+                        <p style="margin: 0;">Cleo is analyzing the market and will begin trading soon. Check back for live updates!</p>
+                    </div>
+                </div>
+
+                <div class="docs-section">
+                    <h3>Performance Metrics</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                        <div style="background: white; border: 1px solid #e5e7eb; border-radius: 8px; padding: 1.5rem; text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: 600; color: #10b981;">0</div>
+                            <div style="font-size: 0.9rem; color: #6b7280;">Total Trades</div>
+                        </div>
+                        <div style="background: white; border: 1px solid #e5e7eb; border-radius: 8px; padding: 1.5rem; text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: 600; color: #10b981;">$0</div>
+                            <div style="font-size: 0.9rem; color: #6b7280;">Total Volume</div>
+                        </div>
+                        <div style="background: white; border: 1px solid #e5e7eb; border-radius: 8px; padding: 1.5rem; text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: 600; color: #6366f1;">0%</div>
+                            <div style="font-size: 0.9rem; color: #6b7280;">Win Rate</div>
+                        </div>
+                        <div style="background: white; border: 1px solid #e5e7eb; border-radius: 8px; padding: 1.5rem; text-align: center;">
+                            <div style="font-size: 1.5rem; font-weight: 600; color: #8b5cf6;">0%</div>
+                            <div style="font-size: 0.9rem; color: #6b7280;">Total P&L</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="docs-section">
+                    <h3>Live Market Analysis</h3>
+                    <div style="background: #fef7e7; border: 1px solid #f59e0b; border-radius: 8px; padding: 1rem;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                            <div style="font-size: 1.2rem;">🧠</div>
+                            <strong style="color: #92400e;">Cleo's Current Status</strong>
+                        </div>
+                        <p style="margin: 0; color: #92400e;">Analyzing market conditions and scanning for memecoin opportunities on Pump.fun, Jupiter, and Bonk platforms...</p>
+                    </div>
+                </div>
+
+                <div class="docs-section">
+                    <h3>How to Track Trades</h3>
+                    <p>Once Cleo begins trading, you can monitor her activity through:</p>
+                    <ul>
+                        <li><strong>This Dashboard:</strong> Real-time trade updates and performance metrics</li>
+                        <li><strong>Solana Explorers:</strong> View raw transaction data on the blockchain</li>
+                        <li><strong>DEX Screeners:</strong> Track token performance on DexScreener and Birdeye</li>
+                        <li><strong>Social Alerts:</strong> Follow our Twitter for major trade announcements</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="chatPage" class="chat-page">
+        <div class="chat-header">
+            <div class="container">
+                <div class="header-content">
+                    <button class="back-btn" onclick="showLanding()">← Back</button>
+                    <h2 class="chat-title">Chat with Cleo</h2>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="chat-container">
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message bot">
+                        Hey! I'm Cleo, a memecoin trading bot powered by Claude Opus. I independently trade Solana memecoins on platforms like Pump.fun, Jupiter, and Bonk. Want to know about my current memecoin picks or recent trades?
+                    </div>
+                </div>
+                
+                <div class="typing-indicator" id="typingIndicator">
+                    <div class="typing-dots">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                </div>
+                
+                <div class="chat-input">
+                    <input type="text" class="input-field" id="messageInput" placeholder="Ask Claudia about memecoins..." onkeypress="handleKeyPress(event)">
+                    <button class="send-btn" id="sendBtn" onclick="sendMessage()">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showLanding() {
+            document.getElementById('landingPage').style.display = 'flex';
+            document.getElementById('chatPage').style.display = 'none';
+            document.getElementById('docsPage').style.display = 'none';
+            document.getElementById('tradesPage').style.display = 'none';
+        }
+
+        function showChat() {
+            document.getElementById('landingPage').style.display = 'none';
+            document.getElementById('chatPage').style.display = 'block';
+            document.getElementById('docsPage').style.display = 'none';
+            document.getElementById('tradesPage').style.display = 'none';
+            document.getElementById('messageInput').focus();
+        }
+
+        function showDocs() {
+            document.getElementById('landingPage').style.display = 'none';
+            document.getElementById('chatPage').style.display = 'none';
+            document.getElementById('docsPage').style.display = 'block';
+            document.getElementById('tradesPage').style.display = 'none';
+            window.scrollTo(0, 0);
+        }
+
+        function showTrades() {
+            document.getElementById('landingPage').style.display = 'none';
+            document.getElementById('chatPage').style.display = 'none';
+            document.getElementById('docsPage').style.display = 'none';
+            document.getElementById('tradesPage').style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Add user message
+            addMessage(message, 'user');
+            input.value = '';
+            
+            // Show typing indicator
+            showTyping();
+            
+            // Simulate AI response
+            setTimeout(() => {
+                hideTyping();
+                const responses = [
+                    "Great question! I'm currently scanning Pump.fun for fresh memecoin launches. Just spotted a promising cat-themed token with solid community engagement - reminds me of early BONK energy. My last trade was on Jupiter, caught a 40% pump on a dog coin!",
+                    "Thanks for asking! I specialize in memecoin momentum trading across Solana. Right now I'm bullish on animal-themed tokens and AI memes. My algorithm caught PEPE2.0 early this morning - already up 25% since my entry on Pump.fun.",
+                    "Hello! Memecoin season is heating up! I just executed a small position in a new Solana meme that's trending on CT. Jupiter's routing helped me get the best price. Always remember - memecoins are pure speculation, but that's where the alpha is!",
+                    "Perfect timing! I'm seeing massive volume on Pump.fun today. My AI analysis picked up unusual social signals around a new community token. Entered a position via Bonk DEX - the narrative is strong and liquidity is building nicely.",
+                    "Hey there! The memecoin market is absolutely wild right now. I've got positions in 3 different animal coins and 2 AI-themed memes. Jupiter's been my go-to for execution - their aggregation saves me serious slippage on these volatile trades.",
+                    "Exciting day for memes! Just took profits on a 3x play I caught on Pump.fun yesterday. My Claude Opus brain loves analyzing social sentiment and community growth - it's all about catching the narrative before it goes viral!"
+                ];
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                addMessage(randomResponse, 'bot');
+            }, 1500 + Math.random() * 1000);
+        }
+
+        function addMessage(text, sender) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}`;
+            messageDiv.textContent = text;
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function showTyping() {
+            document.getElementById('typingIndicator').style.display = 'block';
+            document.getElementById('sendBtn').disabled = true;
+            document.getElementById('chatMessages').scrollTop = document.getElementById('chatMessages').scrollHeight;
+        }
+
+        function hideTyping() {
+            document.getElementById('typingIndicator').style.display = 'none';
+            document.getElementById('sendBtn').disabled = false;
+        }
+
+        // Add some initial animation
+        window.addEventListener('load', () => {
+            document.querySelector('.main-content').style.animation = 'slideIn 1s ease';
+        });
+    </script>
+</body>
+</html>
