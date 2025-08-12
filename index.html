@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cleo - AI Trading Agent</title>
+    <title>Claudia</title>
     <style>
         * {
             margin: 0;
@@ -40,7 +40,7 @@
         .logo {
             font-size: 4rem;
             font-weight: 600;
-            color: #3b82f6;
+            color: #d4672a;
             margin-bottom: 1rem;
             letter-spacing: -1px;
         }
@@ -87,20 +87,20 @@
         }
 
         .btn:hover {
-            border-color: #3b82f6;
+            border-color: #d4672a;
             transform: translateY(-1px);
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
         }
 
         .btn-primary {
-            background: #3b82f6;
+            background: #d4672a;
             color: white;
-            border-color: #3b82f6;
+            border-color: #d4672a;
         }
 
         .btn-primary:hover {
-            background: #2563eb;
-            border-color: #2563eb;
+            background: #b8561f;
+            border-color: #b8561f;
         }
 
         .btn-secondary {
@@ -267,7 +267,7 @@
         }
 
         .message.user {
-            background: #3b82f6;
+            background: #d4672a;
             color: white;
             align-self: flex-end;
         }
@@ -298,12 +298,12 @@
         }
 
         .input-field:focus {
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            border-color: #d4672a;
+            box-shadow: 0 0 0 3px rgba(212, 103, 42, 0.1);
         }
 
         .send-btn {
-            background: #3b82f6;
+            background: #d4672a;
             color: white;
             border: none;
             padding: 0.75rem 1rem;
@@ -315,7 +315,7 @@
         }
 
         .send-btn:hover {
-            background: #2563eb;
+            background: #b8561f;
             transform: translateY(-1px);
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
         }
@@ -361,7 +361,7 @@
             position: fixed;
             top: 1rem;
             right: 1rem;
-            background: #3b82f6;
+            background: #d4672a;
             color: white;
             border: none;
             width: 40px;
@@ -379,7 +379,7 @@
         }
 
         .x-button:hover {
-            background: #2563eb;
+            background: #b8561f;
             transform: translateY(-1px);
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
         }
@@ -413,9 +413,9 @@
     <div id="landingPage" class="landing-page">
         <div class="container">
             <div class="main-content">
-                <h1 class="logo">Cleo</h1>
+                <h1 class="logo">Claudia</h1>
                 <p class="subtitle">
-                    Meet Cleo, a bot we created using Claude Opus who can independently trade Solana memecoins using launchpads such as Pump.fun, Bonk, Jupiter, and more.
+                    Meet Claudia, a bot we created using Claude Opus who can independently trade Solana memecoins using launchpads such as Pump.fun, Bonk, Jupiter, and more.
                 </p>
                 
                 <div class="tech-badge">
@@ -437,7 +437,7 @@
                         View Trades
                     </button>
                     <button class="btn btn-primary" onclick="showChat()">
-                        Chat with Cleo
+                        Chat with Claudia
                     </button>
                 </div>
             </div>
@@ -459,9 +459,9 @@
             <div class="docs-content">
                 <div class="docs-section">
                     <h3>Wallet & Transparency</h3>
-                    <p>Track Cleo's trading activity in real-time through her public Solana wallet:</p>
+                    <p>Track Claudia's trading activity in real-time through her public Solana wallet:</p>
                     <div class="code-block">
-                        <div class="code-header">Cleo's Trading Wallet</div>
+                        <div class="code-header">Claudia's Trading Wallet</div>
                         <pre><code>54bmRfTaBBxHcRHpxndVpjMCUjL8gzHqFSgfGQZLmjS</code></pre>
                     </div>
                     <p>View on Solana explorers:</p>
@@ -492,7 +492,7 @@
 
                 <div class="docs-section">
                     <h3>Trading Strategy</h3>
-                    <p>Cleo employs a multi-factor analysis approach:</p>
+                    <p>Claudia employs a multi-factor analysis approach:</p>
                     <ul>
                         <li><strong>Project Analysis:</strong> Team background, whitepaper quality, roadmap assessment</li>
                         <li><strong>Tokenomics Review:</strong> Supply distribution, vesting schedules, utility analysis</li>
@@ -504,7 +504,7 @@
 
                 <div class="docs-section">
                     <h3>API Integration</h3>
-                    <p>Monitor Cleo's trading activity and get market insights:</p>
+                    <p>Monitor Claudia's trading activity and get market insights:</p>
                     
                     <div class="code-block">
                         <div class="code-header">GET /api/trades</div>
@@ -539,30 +539,30 @@
 
                 <div class="docs-section">
                     <h3>JavaScript SDK</h3>
-                    <p>Integrate Cleo's insights into your applications:</p>
+                    <p>Integrate Claudia's insights into your applications:</p>
                     
                     <div class="code-block">
                         <div class="code-header">Installation</div>
-                        <pre><code>npm install cleo-trading-sdk</code></pre>
+                        <pre><code>npm install claudia-trading-sdk</code></pre>
                     </div>
 
                     <div class="code-block">
                         <div class="code-header">Usage</div>
-                        <pre><code>import { CleoClient } from 'cleo-trading-sdk';
+                        <pre><code>import { ClaudiaClient } from 'claudia-trading-sdk';
 
-const cleo = new CleoClient({
+const claudia = new ClaudiaClient({
   apiKey: 'your-api-key',
   network: 'solana-mainnet'
 });
 
 // Get current portfolio
-const portfolio = await cleo.getPortfolio();
+const portfolio = await claudia.getPortfolio();
 
 // Get market analysis
-const analysis = await cleo.getMarketAnalysis();
+const analysis = await claudia.getMarketAnalysis();
 
 // Subscribe to trade notifications
-cleo.onTrade((trade) => {
+claudia.onTrade((trade) => {
   console.log('New trade:', trade);
 });</code></pre>
                     </div>
@@ -575,10 +575,10 @@ cleo.onTrade((trade) => {
                     <div class="code-block">
                         <div class="code-header">Rust Program Example</div>
                         <pre><code>use anchor_lang::prelude::*;
-use cleo_trading::state::TradeInstruction;
+use claudia_trading::state::TradeInstruction;
 
 #[program]
-pub mod cleo_integration {
+pub mod claudia_integration {
     use super::*;
     
     pub fn execute_trade(
@@ -591,8 +591,8 @@ pub mod cleo_integration {
             ErrorCode::InvalidTradeAmount
         );
         
-        // Execute trade through Cleo
-        cleo_trading::execute_trade(
+        // Execute trade through Claudia
+        claudia_trading::execute_trade(
             &ctx.accounts.trader,
             &instruction
         )?;
@@ -605,14 +605,14 @@ pub mod cleo_integration {
 
                 <div class="docs-section">
                     <h3>Python Integration</h3>
-                    <p>Monitor and analyze Cleo's performance:</p>
+                    <p>Monitor and analyze Claudia's performance:</p>
                     
                     <div class="code-block">
                         <div class="code-header">Python SDK</div>
-                        <pre><code>from cleo_sdk import CleoTrader
+                        <pre><code>from claudia_sdk import ClaudiaTrader
 
-# Initialize Cleo client
-trader = CleoTrader(
+# Initialize Claudia client
+trader = ClaudiaTrader(
     api_key="your-api-key",
     network="solana"
 )
@@ -629,7 +629,7 @@ for position in positions:
 # Subscribe to trade alerts
 @trader.on_trade
 def handle_trade(trade):
-    print(f"Cleo {'bought' if trade.side == 'buy' else 'sold'} "
+    print(f"Claudia {'bought' if trade.side == 'buy' else 'sold'} "
           f"{trade.amount} {trade.token}")
 </code></pre>
                     </div>
@@ -649,7 +649,7 @@ def handle_trade(trade):
 
                 <div class="docs-section">
                     <h3>Risk Management & Limits</h3>
-                    <p>Cleo implements multiple layers of risk control:</p>
+                    <p>Claudia implements multiple layers of risk control:</p>
                     <ul>
                         <li><strong>Position Limits:</strong> Maximum 5% of portfolio per trade</li>
                         <li><strong>Daily Loss Limit:</strong> Trading halts at 10% daily drawdown</li>
@@ -661,7 +661,7 @@ def handle_trade(trade):
 
                 <div class="docs-section">
                     <h3>Performance Tracking</h3>
-                    <p>Monitor Cleo's trading performance:</p>
+                    <p>Monitor Claudia's trading performance:</p>
                     <ul>
                         <li><strong>Real-time P&L:</strong> Live portfolio tracking</li>
                         <li><strong>Win Rate:</strong> Percentage of profitable trades</li>
@@ -675,22 +675,22 @@ def handle_trade(trade):
                     <h3>Getting Started</h3>
                     <ol>
                         <li>Fund your Solana wallet with SOL for trading</li>
-                        <li>Sign up for API access at <code>https://cleo-trader.com</code></li>
+                        <li>Sign up for API access at <code>https://claudia-trader.com</code></li>
                         <li>Configure your risk parameters and position sizes</li>
-                        <li>Enable Cleo and start automated trading</li>
+                        <li>Enable Claudia and start automated trading</li>
                     </ol>
                     <p><strong>Important:</strong> Start with small amounts to test the system. Automated trading is highly risky.</p>
                 </div>
 
                 <div class="docs-section">
                     <h3>Support & Community</h3>
-                    <p>Join the Cleo trading community:</p>
+                    <p>Join the Claudia trading community:</p>
                     <ul>
-                        <li><strong>Discord:</strong> discord.gg/cleo-trader</li>
-                        <li><strong>Telegram:</strong> t.me/cleo_trader</li>
-                        <li><strong>GitHub:</strong> github.com/cleo-trader/sdk</li>
-                        <li><strong>Email:</strong> support@cleo-trader.com</li>
-                        <li><strong>Documentation:</strong> docs.cleo-trader.com</li>
+                        <li><strong>Discord:</strong> discord.gg/claudia-trader</li>
+                        <li><strong>Telegram:</strong> t.me/claudia_trader</li>
+                        <li><strong>GitHub:</strong> github.com/claudia-trader/sdk</li>
+                        <li><strong>Email:</strong> support@claudia-trader.com</li>
+                        <li><strong>Documentation:</strong> docs.claudia-trader.com</li>
                     </ul>
                 </div>
             </div>
@@ -702,7 +702,7 @@ def handle_trade(trade):
             <div class="container">
                 <div class="header-content">
                     <button class="back-btn" onclick="showLanding()">← Back</button>
-                    <h2 class="docs-title">Cleo's Trades</h2>
+                    <h2 class="docs-title">Claudia's Trades</h2>
                     <div></div>
                 </div>
             </div>
@@ -712,7 +712,7 @@ def handle_trade(trade):
             <div class="docs-content">
                 <div class="docs-section">
                     <h3>Trading Activity</h3>
-                    <p>Track Cleo's live memecoin trades and performance metrics in real-time.</p>
+                    <p>Track Claudia's live memecoin trades and performance metrics in real-time.</p>
                     <p><strong>Wallet:</strong> <code style="background: #f3f4f6; padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace;">54bmRfTaBBxHcRHpxndVpjMCUjL8gzHqFSgfGQZLmjS</code></p>
                 </div>
 
@@ -721,7 +721,7 @@ def handle_trade(trade):
                     <div style="text-align: center; padding: 3rem 2rem; background: #f9fafb; border: 2px dashed #d1d5db; border-radius: 12px; color: #6b7280;">
                         <div style="font-size: 3rem; margin-bottom: 1rem;">📊</div>
                         <h4 style="color: #374151; margin-bottom: 0.5rem;">No trades made yet</h4>
-                        <p style="margin: 0;">Cleo is analyzing the market and will begin trading soon. Check back for live updates!</p>
+                        <p style="margin: 0;">Claudia is analyzing the market and will begin trading soon. Check back for live updates!</p>
                     </div>
                 </div>
 
@@ -729,7 +729,7 @@ def handle_trade(trade):
                     <h3>Performance Metrics</h3>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
                         <div style="background: white; border: 1px solid #e5e7eb; border-radius: 8px; padding: 1.5rem; text-align: center;">
-                            <div style="font-size: 1.5rem; font-weight: 600; color: #3b82f6;">0</div>
+                            <div style="font-size: 1.5rem; font-weight: 600; color: #d4672a;">0</div>
                             <div style="font-size: 0.9rem; color: #6b7280;">Total Trades</div>
                         </div>
                         <div style="background: white; border: 1px solid #e5e7eb; border-radius: 8px; padding: 1.5rem; text-align: center;">
@@ -752,7 +752,7 @@ def handle_trade(trade):
                     <div style="background: #fef7e7; border: 1px solid #f59e0b; border-radius: 8px; padding: 1rem;">
                         <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
                             <div style="font-size: 1.2rem;">🧠</div>
-                            <strong style="color: #92400e;">Cleo's Current Status</strong>
+                            <strong style="color: #92400e;">Claudia's Current Status</strong>
                         </div>
                         <p style="margin: 0; color: #92400e;">Analyzing market conditions and scanning for memecoin opportunities on Pump.fun, Jupiter, and Bonk platforms...</p>
                     </div>
@@ -760,7 +760,7 @@ def handle_trade(trade):
 
                 <div class="docs-section">
                     <h3>How to Track Trades</h3>
-                    <p>Once Cleo begins trading, you can monitor her activity through:</p>
+                    <p>Once Claudia begins trading, you can monitor her activity through:</p>
                     <ul>
                         <li><strong>This Dashboard:</strong> Real-time trade updates and performance metrics</li>
                         <li><strong>Solana Explorers:</strong> View raw transaction data on the blockchain</li>
@@ -777,7 +777,7 @@ def handle_trade(trade):
             <div class="container">
                 <div class="header-content">
                     <button class="back-btn" onclick="showLanding()">← Back</button>
-                    <h2 class="chat-title">Chat with Cleo</h2>
+                    <h2 class="chat-title">Chat with Claudia</h2>
                     <div></div>
                 </div>
             </div>
@@ -787,7 +787,7 @@ def handle_trade(trade):
             <div class="chat-container">
                 <div class="chat-messages" id="chatMessages">
                     <div class="message bot">
-                        Hey! I'm Cleo, a memecoin trading bot powered by Claude Opus. I independently trade Solana memecoins on platforms like Pump.fun, Jupiter, and Bonk. Want to know about my current memecoin picks or recent trades?
+                        Hey! I'm Claudia, a memecoin trading bot powered by Claude Opus. I independently trade Solana memecoins on platforms like Pump.fun, Jupiter, and Bonk. Want to know about my current memecoin picks or recent trades?
                     </div>
                 </div>
                 
@@ -800,7 +800,7 @@ def handle_trade(trade):
                 </div>
                 
                 <div class="chat-input">
-                    <input type="text" class="input-field" id="messageInput" placeholder="Ask Cleo about memecoins..." onkeypress="handleKeyPress(event)">
+                    <input type="text" class="input-field" id="messageInput" placeholder="Ask Claudia about memecoins..." onkeypress="handleKeyPress(event)">
                     <button class="send-btn" id="sendBtn" onclick="sendMessage()">Send</button>
                 </div>
             </div>
