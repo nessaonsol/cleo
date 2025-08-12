@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cleo</title>
-    <link rel="icon" type="image/x-icon" href="cleo.png">
+    <title>Cleo - AI Trading Agent</title>
     <style>
         * {
             margin: 0;
@@ -41,7 +40,7 @@
         .logo {
             font-size: 4rem;
             font-weight: 600;
-            color: #10b981;
+            color: #3b82f6;
             margin-bottom: 1rem;
             letter-spacing: -1px;
         }
@@ -88,20 +87,20 @@
         }
 
         .btn:hover {
-            border-color: #10b981;
+            border-color: #3b82f6;
             transform: translateY(-1px);
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
         }
 
         .btn-primary {
-            background: #10b981;
+            background: #3b82f6;
             color: white;
-            border-color: #10b981;
+            border-color: #3b82f6;
         }
 
         .btn-primary:hover {
-            background: #059669;
-            border-color: #059669;
+            background: #2563eb;
+            border-color: #2563eb;
         }
 
         .btn-secondary {
@@ -268,7 +267,7 @@
         }
 
         .message.user {
-            background: #10b981;
+            background: #3b82f6;
             color: white;
             align-self: flex-end;
         }
@@ -299,12 +298,12 @@
         }
 
         .input-field:focus {
-            border-color: #10b981;
-            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
 
         .send-btn {
-            background: #10b981;
+            background: #3b82f6;
             color: white;
             border: none;
             padding: 0.75rem 1rem;
@@ -316,7 +315,7 @@
         }
 
         .send-btn:hover {
-            background: #059669;
+            background: #2563eb;
             transform: translateY(-1px);
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
         }
@@ -362,7 +361,7 @@
             position: fixed;
             top: 1rem;
             right: 1rem;
-            background: #10b981;
+            background: #3b82f6;
             color: white;
             border: none;
             width: 40px;
@@ -380,7 +379,7 @@
         }
 
         .x-button:hover {
-            background: #059669;
+            background: #2563eb;
             transform: translateY(-1px);
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
         }
@@ -407,7 +406,7 @@
     </style>
 </head>
 <body>
-    <button class="x-button" onclick="window.open('https://x.com/CleoBags', '_blank')" title="Follow us on X">
+    <button class="x-button" onclick="window.open('https://x.com', '_blank')" title="Follow us on X">
         𝕏
     </button>
     
@@ -460,9 +459,9 @@
             <div class="docs-content">
                 <div class="docs-section">
                     <h3>Wallet & Transparency</h3>
-                    <p>Track Claudia's trading activity in real-time through her public Solana wallet:</p>
+                    <p>Track Cleo's trading activity in real-time through her public Solana wallet:</p>
                     <div class="code-block">
-                        <div class="code-header">Claudia's Trading Wallet</div>
+                        <div class="code-header">Cleo's Trading Wallet</div>
                         <pre><code>54bmRfTaBBxHcRHpxndVpjMCUjL8gzHqFSgfGQZLmjS</code></pre>
                     </div>
                     <p>View on Solana explorers:</p>
@@ -576,10 +575,10 @@ cleo.onTrade((trade) => {
                     <div class="code-block">
                         <div class="code-header">Rust Program Example</div>
                         <pre><code>use anchor_lang::prelude::*;
-use claudia_trading::state::TradeInstruction;
+use cleo_trading::state::TradeInstruction;
 
 #[program]
-pub mod claudia_integration {
+pub mod cleo_integration {
     use super::*;
     
     pub fn execute_trade(
@@ -592,8 +591,8 @@ pub mod claudia_integration {
             ErrorCode::InvalidTradeAmount
         );
         
-        // Execute trade through Claudia
-        claudia_trading::execute_trade(
+        // Execute trade through Cleo
+        cleo_trading::execute_trade(
             &ctx.accounts.trader,
             &instruction
         )?;
@@ -730,7 +729,7 @@ def handle_trade(trade):
                     <h3>Performance Metrics</h3>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
                         <div style="background: white; border: 1px solid #e5e7eb; border-radius: 8px; padding: 1.5rem; text-align: center;">
-                            <div style="font-size: 1.5rem; font-weight: 600; color: #10b981;">0</div>
+                            <div style="font-size: 1.5rem; font-weight: 600; color: #3b82f6;">0</div>
                             <div style="font-size: 0.9rem; color: #6b7280;">Total Trades</div>
                         </div>
                         <div style="background: white; border: 1px solid #e5e7eb; border-radius: 8px; padding: 1.5rem; text-align: center;">
@@ -801,7 +800,7 @@ def handle_trade(trade):
                 </div>
                 
                 <div class="chat-input">
-                    <input type="text" class="input-field" id="messageInput" placeholder="Ask Claudia about memecoins..." onkeypress="handleKeyPress(event)">
+                    <input type="text" class="input-field" id="messageInput" placeholder="Ask Cleo about memecoins..." onkeypress="handleKeyPress(event)">
                     <button class="send-btn" id="sendBtn" onclick="sendMessage()">Send</button>
                 </div>
             </div>
@@ -901,5 +900,4 @@ def handle_trade(trade):
         });
     </script>
 </body>
-
 </html>
